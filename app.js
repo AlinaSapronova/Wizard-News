@@ -24,7 +24,8 @@ app.get("/", (req, res) => {
       (post) => `
     <div class='news-item'>
           <p>
-          <span class="news-position">${post.id}. ▲</span>${post.title}  
+          <span class="news-position">
+          <a href="/posts/${post.id}">${post.title}</a> 
           <small>(by ${post.name})</small>
           </p>
           <small class="news-info">
@@ -38,6 +39,43 @@ app.get("/", (req, res) => {
 </html>`;
   res.send(html);
 });
+
+app.get('/posts/:id', (req, res) => {
+  const id = req.params.id;
+  const post = postBank.find(id);
+  if (!post.id) {
+    next()
+  }else{
+  res.send(`<!DOCTYPE html>
+  <html>
+  <head>
+  <title>Wizard News</title>
+  <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+  <div class="news-list">
+  <header><img src="/logo.png"/>Wizard News</header>
+  <div class='news-item'>
+  <p>
+  <span class="news-position"></span>${post.title} <small>(by ${post.name})</small>  
+   </p>
+   <p>${post.content}</p>
+  <small class="news-info">
+   ${post.date}
+  </small>
+</div>
+</div>
+</body>
+</html>`
+  );
+  
+
+}})
+
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(404).send('404 Error: Page not found!')
+})
 
 const PORT = 1337;
 
