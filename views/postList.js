@@ -1,8 +1,7 @@
 const timeAgo = require("node-time-ago");
 
-module.exports = (posts) => 
 
-  `<!DOCTYPE html>
+module.exports = (posts) => `<!DOCTYPE html>
 <html>
 <head>
 <title>Wizard News</title>
@@ -29,4 +28,4 @@ ${posts
   </div>
 </body>
 </html>`;
-;
+

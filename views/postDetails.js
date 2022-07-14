@@ -1,5 +1,6 @@
+const timeAgo = require("node-time-ago");
 
-module.exports = (post) => `<!DOCTYPE html>
+module.exports = (post) =>  `<!DOCTYPE html>
 <html>
 <head>
 <title>Wizard News</title>
@@ -14,9 +15,10 @@ module.exports = (post) => `<!DOCTYPE html>
  </p>
  <p>${post.content}</p>
 <small class="news-info">
- ${post.date}
+${timeAgo(post.date)}
 </small>
 </div>
 </div>
 </body>
 </html>`
+//create heroku
