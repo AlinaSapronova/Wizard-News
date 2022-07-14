@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const postBank = require("./postBank");
 const app = express();
+const timeAgo = require('node-time-ago');
 
 app.use(express.static("public"));
 
@@ -9,7 +10,6 @@ app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
   const posts = postBank.list();
-
   const html = `<!DOCTYPE html>
   <html>
   <head>
@@ -25,11 +25,11 @@ app.get("/", (req, res) => {
     <div class='news-item'>
           <p>
           <span class="news-position">
-          <a href="/posts/${post.id}">${post.title}</a> 
+          <a href="/posts/${post.id}">▲${post.title}</a> 
           <small>(by ${post.name})</small>
           </p>
           <small class="news-info">
-            ${post.upvotes} upvotes | ${post.date}
+            ${post.upvotes} upvotes | ${timeAgo(post.date)}
           </small>
         </div>`
     )
