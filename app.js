@@ -6,13 +6,12 @@ const postList = require("./views/postList");
 const postDetails = require("./views/postDetails") ;
 
 
-app.use(express.static(__dirname + "public"));
+app.use(express.static(__dirname + "/public"));
 
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
   const posts = postBank.list();
-  
   res.send(postList(posts));
 });
 
